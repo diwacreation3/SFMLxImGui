@@ -1,7 +1,6 @@
 /*
 Author: Diwakar phuyal 
 github: https://github.com/diwacreation3
-
 feel free to use this template 
 */
 
@@ -10,7 +9,7 @@ feel free to use this template
 #include "imgui-SFML.h"
 
 //SFML header files 
-#include <SFML/graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 using namespace std;
