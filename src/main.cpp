@@ -16,8 +16,8 @@ using namespace std;
 using namespace sf;
 
 // window properties
-int _width = 640;
-int _height = 480;
+int _width = 800;
+int _height = 600;
 string _title = "SFML and imgui ";
 
 // main function
