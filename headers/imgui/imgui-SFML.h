@@ -15,12 +15,6 @@
 #define IMGUI_SFML_NODISCARD
 #endif
 
-#if __cplusplus >= 201402L // C++14 and above
-#define IMGUI_SFML_DEPRECATED [[deprecated]]
-#else
-#define IMGUI_SFML_DEPRECATED
-#endif
-
 namespace sf {
 class Event;
 class RenderTarget;
@@ -41,9 +35,8 @@ IMGUI_SFML_NODISCARD IMGUI_SFML_API bool Init(sf::Window& window, const sf::Vect
                                               bool loadDefaultFont = true);
 
 IMGUI_SFML_API void SetCurrentWindow(const sf::Window& window);
-
-// DEPRECATED: Use ProcessEvent(const sf::Window& window, const sf::Event& event)
-IMGUI_SFML_DEPRECATED IMGUI_SFML_API void ProcessEvent(const sf::Event& event);
+IMGUI_SFML_API void ProcessEvent(const sf::Event& event); // DEPRECATED: use (window,
+                                                          // event) overload
 IMGUI_SFML_API void ProcessEvent(const sf::Window& window, const sf::Event& event);
 
 IMGUI_SFML_API void Update(sf::RenderWindow& window, sf::Time dt);
@@ -51,7 +44,7 @@ IMGUI_SFML_API void Update(sf::Window& window, sf::RenderTarget& target, sf::Tim
 IMGUI_SFML_API void Update(const sf::Vector2i& mousePos, const sf::Vector2f& displaySize,
                            sf::Time dt);
 
-IMGUI_SFML_API void Render(sf::RenderWindow& window);
+IMGUI_SFML_API void Render(sf::RenderWindow& target);
 IMGUI_SFML_API void Render(sf::RenderTarget& target);
 IMGUI_SFML_API void Render();
 
@@ -106,29 +99,29 @@ IMGUI_SFML_API void Image(const sf::Sprite& sprite, const sf::Vector2f& size,
                           const sf::Color& borderColor = sf::Color::Transparent);
 
 // ImageButton overloads for sf::Texture
-IMGUI_SFML_API bool ImageButton(const sf::Texture& texture, int framePadding = -1,
+IMGUI_SFML_API bool ImageButton(const sf::Texture& texture, const int framePadding = -1,
                                 const sf::Color& bgColor = sf::Color::Transparent,
                                 const sf::Color& tintColor = sf::Color::White);
 IMGUI_SFML_API bool ImageButton(const sf::Texture& texture, const sf::Vector2f& size,
-                                int framePadding = -1,
+                                const int framePadding = -1,
                                 const sf::Color& bgColor = sf::Color::Transparent,
                                 const sf::Color& tintColor = sf::Color::White);
 
 // ImageButton overloads for sf::RenderTexture
-IMGUI_SFML_API bool ImageButton(const sf::RenderTexture& texture, int framePadding = -1,
+IMGUI_SFML_API bool ImageButton(const sf::RenderTexture& texture, const int framePadding = -1,
                                 const sf::Color& bgColor = sf::Color::Transparent,
                                 const sf::Color& tintColor = sf::Color::White);
 IMGUI_SFML_API bool ImageButton(const sf::RenderTexture& texture, const sf::Vector2f& size,
-                                int framePadding = -1,
+                                const int framePadding = -1,
                                 const sf::Color& bgColor = sf::Color::Transparent,
                                 const sf::Color& tintColor = sf::Color::White);
 
 // ImageButton overloads for sf::Sprite
-IMGUI_SFML_API bool ImageButton(const sf::Sprite& sprite, int framePadding = -1,
+IMGUI_SFML_API bool ImageButton(const sf::Sprite& sprite, const int framePadding = -1,
                                 const sf::Color& bgColor = sf::Color::Transparent,
                                 const sf::Color& tintColor = sf::Color::White);
 IMGUI_SFML_API bool ImageButton(const sf::Sprite& sprite, const sf::Vector2f& size,
-                                int framePadding = -1,
+                                const int framePadding = -1,
                                 const sf::Color& bgColor = sf::Color::Transparent,
                                 const sf::Color& tintColor = sf::Color::White);
 
@@ -143,4 +136,4 @@ IMGUI_SFML_API void DrawRectFilled(const sf::FloatRect& rect, const sf::Color& c
                                    float rounding = 0.0f, int rounding_corners = 0x0F);
 } // end of namespace ImGui
 
-#endif // # IMGUI_SFML_H
+#endif //# IMGUI_SFML_H
