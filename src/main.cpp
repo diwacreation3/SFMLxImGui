@@ -1,40 +1,64 @@
+/*
+Author: Diwakar phuyal 
+github: https://github.com/diwacreation3
+
+feel free to use this template 
+*/
+
+//Imgui header files 
 #include "imgui.h"
 #include "imgui-SFML.h"
 
-#include<SFML/Graphics.hpp>
+//SFML header files 
+#include <SFML/graphics.hpp>
+#include <iostream>
 
-int main() {
-    sf::RenderWindow window(sf::VideoMode(1080, 720), "ImGui + SFML = <3");
+using namespace std;
+using namespace sf;
+
+// window properties
+int _width = 640;
+int _height = 480;
+string _title = "SFML and imgui ";
+
+// main function
+int main()
+{
+    RenderWindow window(VideoMode(_width, _height), _title);
     window.setFramerateLimit(60);
     ImGui::SFML::Init(window);
 
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    CircleShape shape(100.f);
+    shape.setFillColor(Color::Blue);
 
-    sf::Clock deltaClock;
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            ImGui::SFML::ProcessEvent(window, event);
+    Clock deltaClock;
 
-            if (event.type == sf::Event::Closed) {
+    // main loop
+    while (window.isOpen())
+    {
+        Event event; // listen click events
+        while (window.pollEvent(event))
+        {
+            ImGui::SFML::ProcessEvent(window,event);
+            if (event.type == Event::Closed) // Check if close button pressed or not
                 window.close();
-            }
         }
-
-        ImGui::SFML::Update(window, deltaClock.restart());
+        ImGui::SFML::Update(window,deltaClock.restart());
 
         ImGui::ShowDemoWindow();
 
-        ImGui::Begin("Hello, world!");
-        ImGui::Button("Look at this pretty button");
+        ImGui::Begin("Hello, Nepal");
+        ImGui::Button("pres me Bro");
         ImGui::End();
 
+        // Clearing the window
         window.clear();
-        window.draw(shape);
+        
+        window.draw(shape); 
         ImGui::SFML::Render(window);
+        
         window.display();
     }
-
     ImGui::SFML::Shutdown();
+    return 0;
 }

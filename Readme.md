@@ -16,6 +16,8 @@ I wanted to build gui applications with SFML and Dear Imgui. I didn,t find any r
 Now you are good to go 😉
 
 # How to build 🤷‍♀️
+> Note first run take some time to compile so be clam 
+
 You need to instal Msys and Mingw as mentioned above.
 
 <b> After installing mingw follow these steps 👀
