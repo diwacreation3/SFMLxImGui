@@ -30,8 +30,11 @@ $(TARGET): $(OBJS)
 clean:
 	del $(OBJ_DIR)/*.o $(TARGET)
 
+#add your other cpp files just like below syantax 
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp | $(OBJ_DIR)
 	$(CXX) -c $(CXXFLAGS) $(SRC_DIR)/main.cpp -o $@
+	
+#just like above 
 
 $(OBJ_DIR)/imgui.o: $(IMGUI_DIR)/imgui.cpp | $(OBJ_DIR)
 	$(CXX) -c $(CXXFLAGS) $(IMGUI_DIR)/imgui.cpp -o $@
