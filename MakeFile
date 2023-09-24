@@ -1,0 +1,56 @@
+TARGET=main
+CXX=g++ -std=c++11
+DEBUG=-g
+OPT=-O0
+WARN=-Wall
+
+SFML_DIR=sfml
+IMGUI_DIR=include
+
+SFML_INCLUDE_PATH=$(SFML_DIR)\include
+SFML_LIB_PATH=$(SFML_DIR)\lib
+IMGUI_INCLUDE_PATH=$(IMGUI_DIR)
+
+SFML_LIBS=-lsfml-graphics -lsfml-window -lsfml-system
+IMGUI_SRC=$(IMGUI_DIR)\imgui.cpp $(IMGUI_DIR)\imgui_demo.cpp $(IMGUI_DIR)\imgui_draw.cpp
+
+CXXFLAGS=$(DEBUG) $(OPT) $(WARN) -I$(SFML_INCLUDE_PATH) -I$(IMGUI_INCLUDE_PATH)
+LDLIBS=-L$(SFML_LIB_PATH) $(SFML_LIBS) -lopengl32
+
+OBJ_DIR=obj
+OBJS=$(OBJ_DIR)/main.o $(OBJ_DIR)/imgui.o $(OBJ_DIR)/imgui_demo.o $(OBJ_DIR)/imgui_draw.o $(OBJ_DIR)/imgui-SFML.o $(OBJ_DIR)/imgui_tables.o $(OBJ_DIR)/imgui_widgets.o
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CXX) -o $@ $(OBJS) $(LDLIBS)
+
+
+clean:
+	del $(OBJ_DIR)/*.o $(TARGET)
+
+$(OBJ_DIR)/main.o: main.cpp | $(OBJ_DIR)
+	$(CXX) -c $(CXXFLAGS) main.cpp -o $@
+
+$(OBJ_DIR)/imgui.o: $(IMGUI_DIR)/imgui.cpp | $(OBJ_DIR)
+	$(CXX) -c $(CXXFLAGS) $(IMGUI_DIR)/imgui.cpp -o $@
+
+$(OBJ_DIR)/imgui_demo.o: $(IMGUI_DIR)/imgui_demo.cpp | $(OBJ_DIR)
+	$(CXX) -c $(CXXFLAGS) $(IMGUI_DIR)/imgui_demo.cpp -o $@
+
+$(OBJ_DIR)/imgui_draw.o: $(IMGUI_DIR)/imgui_draw.cpp | $(OBJ_DIR)
+	$(CXX) -c $(CXXFLAGS) $(IMGUI_DIR)/imgui_draw.cpp -o $@
+
+$(OBJ_DIR)/imgui-SFML.o: $(IMGUI_DIR)/imgui-SFML.cpp | $(OBJ_DIR)
+	$(CXX) -c $(CXXFLAGS) $(IMGUI_DIR)/imgui-SFML.cpp -o $@
+
+$(OBJ_DIR)/imgui_tables.o: $(IMGUI_DIR)/imgui_tables.cpp | $(OBJ_DIR)
+	$(CXX) -c $(CXXFLAGS) $(IMGUI_DIR)/imgui_tables.cpp -o $@
+
+$(OBJ_DIR)/imgui_widgets.o: $(IMGUI_DIR)/imgui_widgets.cpp | $(OBJ_DIR)
+	$(CXX) -c $(CXXFLAGS) $(IMGUI_DIR)/imgui_widgets.cpp -o $@
+
+run: 
+	./$(TARGET).exe 
+$(OBJ_DIR):
+	mkdir  $(OBJ_DIR)
